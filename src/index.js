@@ -1,12 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import { createStore } from 'redux'
+import Root from './components/Root'
 import reportWebVitals from './reportWebVitals';
+
+const userReducer = (userState = {}, action) => {
+    return action.type === 'LOGIN' ? action.payload : userState
+}
+
+const store = createStore(userReducer, {})
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <Root store={store} />
   </React.StrictMode>,
   document.getElementById('root')
 );
