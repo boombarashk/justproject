@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect, Provider } from 'react-redux'
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
-import App from './App.js'
+import { NavLink, BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import About from './About.js'
 import Auth from './Auth.js'
 import Chapters from "./Chapters";
 import Chapter from "./Chapter";
@@ -23,8 +23,14 @@ const ConnectedPrivateRoute = connect(state => ({
 const Root = ({ store }) => {
     return <Provider store={store}>
         <Router>
+            <nav className="tabs">
+                <NavLink isActive={(match, location)=>{console.log('--home active', match, location)}} activeClassName="is-active" to="/"><span>На главную</span></NavLink>
+                <NavLink activeClassName="is-active" to="/news"><span>Новости</span></NavLink>
+                <NavLink activeClassName="is-active" to="/profile"><span>Профиль</span></NavLink>
+            </nav>
+
             <Switch>
-                <Route exact path="/" component={App}/>
+                <Route exact path="/" component={About}/>
                 <Route exact path="/news" component={Chapters}/>
                 <Route path="/news/:id" children={<Chapter/>}/>
                 <Route path="/login" component={Auth}/>

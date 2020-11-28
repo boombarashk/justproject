@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import 'bulma/css/bulma.css'
 import { createStore } from 'redux'
 import Root from './components/Root'
 import reportWebVitals from './reportWebVitals';
