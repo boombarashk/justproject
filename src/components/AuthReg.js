@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import InputBox from "./InputBox";
 import {LOGIN} from "../store";
+import {PREFIX} from "./Root";
 
 const fields = {
     email: {
@@ -45,7 +46,7 @@ const handlerSubmit = (ev, form, changeNeedSubmitErrorView, restProps) => {
             password: form.pwd.value
         })) {
             restProps.login({email: form.email.value})
-            restProps.history.push('/profile')
+            restProps.history.push(PREFIX + '/profile')
         } else {
             changeNeedSubmitErrorView(true)
         }
