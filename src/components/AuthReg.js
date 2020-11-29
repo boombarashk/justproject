@@ -2,8 +2,8 @@ import React, {useState, useRef} from "react";
 import CryptoJS from 'crypto-js'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-
 import InputBox from "./InputBox";
+import {LOGIN} from "../store";
 
 const fields = {
     email: {
@@ -35,7 +35,7 @@ const fields = {
 }
 
 export const MODE_FORM_AUTH = 'auth'
-const MODE_FORM_REG = 'reg'
+export const MODE_FORM_REG = 'reg'
 const handlerSubmit = (ev, form, changeNeedSubmitErrorView, restProps) => {
     const {mode} = restProps || MODE_FORM_REG
     ev.preventDefault()
@@ -44,7 +44,7 @@ const handlerSubmit = (ev, form, changeNeedSubmitErrorView, restProps) => {
             user: form.email.value,
             password: form.pwd.value
         })) {
-            restProps.login(form.email.value)
+            restProps.login({email: form.email.value})
             restProps.history.push('/profile')
         } else {
             changeNeedSubmitErrorView(true)
@@ -94,13 +94,13 @@ function AuthRegForm(props) {
             }}>{props.mode === MODE_FORM_REG ? 'Ok' : 'Войти'}</button>
         </div>
 
-        <div className={`help is-danger ${needSubmitErrorView || props.mode === MODE_FORM_REG ? '': 'is-hidden'}`}>
+        <div className={`help is-danger ${needSubmitErrorView && props.mode === MODE_FORM_AUTH ? '': 'is-hidden'}`}>
             Имя пользователя или пароль введены не верно
         </div>
     </form>
 }
 
-const login = (user) => ({ type: 'LOGIN', payload: user })
+const login = (user) => ({ type: LOGIN, payload: user })
 const mapDispatchToProps = dispatch => {
     return {
         login: user => dispatch(login({user}))

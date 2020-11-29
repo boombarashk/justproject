@@ -24,7 +24,7 @@ const Root = ({ store }) => {
     return <Provider store={store}>
         <Router>
             <nav className="tabs">
-                <NavLink isActive={(match, location)=>{console.log('--home active', match, location)}} activeClassName="is-active" to="/"><span>На главную</span></NavLink>
+                <NavLink exact={true} activeClassName="is-invisible" to="/"><span>На главную</span></NavLink>
                 <NavLink activeClassName="is-active" to="/news"><span>Новости</span></NavLink>
                 <NavLink activeClassName="is-active" to="/profile"><span>Профиль</span></NavLink>
             </nav>
